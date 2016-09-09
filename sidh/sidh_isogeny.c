@@ -443,7 +443,7 @@ void sidh_isogeny_evaluate_strategy_rec(elliptic_curve_t E,
                                         long e,
                                         float ratio) {
 
-    if (e <= 3) {
+    if (e == 1) {
         isogeny_t isogeny;
 
         long kernel_size = (long) pow(l, e);
@@ -453,11 +453,11 @@ void sidh_isogeny_evaluate_strategy_rec(elliptic_curve_t E,
         sidh_elliptic_curve_set(E, isogeny->codomain);
 
         for (long i = 0; i < num_points; i++) {
-            sidh_isogeny_evaluate_kohel(points[i], isogeny, points[i]);
+            sidh_isogeny_evaluate_velu(points[i], isogeny, points[i]);
         }
 
         for (long i = 0; i < num_gens - 1; i++) {
-            sidh_isogeny_evaluate_kohel(kernel_gens[i], 
+            sidh_isogeny_evaluate_velu(kernel_gens[i], 
                                         isogeny,
                                         kernel_gens[i]);
         }
