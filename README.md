@@ -1,4 +1,4 @@
-# sidh-c-reference
+# SIDH C Reference
 
 A reference implementation of the Supersingular Isogeny Key Exchange System in C.
 
