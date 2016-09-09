@@ -42,13 +42,13 @@ typedef fp2_element_struct fp2_element_t[1];
 //////////////// fp methods //////////////////////////
 
 /**
- * {@link init_chararacteristic}
+ * {@link sidh_init_chararacteristic}
  * @param p
  */
 void sidh_fp_init_chararacteristic_ui(long p);
 
 /**
- * {@link init_chararacteristic}
+ * {@link sidh_init_chararacteristic}
  * @param value
  */
 void sidh_fp_init_chararacteristic_str(const char *value);
@@ -77,7 +77,7 @@ void sidh_fp_add(mpz_t x,
                  const mpz_t b);
 
 /**
- * {@link fp_add}.
+ * {@link sidh_fp_add}.
  * @param x
  * @param a
  * @param b
@@ -97,7 +97,7 @@ void sidh_fp_sub(mpz_t x,
                  const mpz_t b);
 
 /**
- * {@link fp_sub}
+ * {@link sidh_fp_sub}
  * @param x
  * @param a
  * @param b
@@ -117,7 +117,7 @@ void sidh_fp_mul(mpz_t x,
                  const mpz_t b);
 
 /**
- * {@link fp_mul}
+ * {@link sidh_fp_mul}
  * @param x
  * @param a
  * @param b
@@ -181,7 +181,7 @@ void sidh_fp2_init_set_si(fp2_element_t x,
                           long b);
 
 /**
- * {@link fp2_init_set_si}.
+ * {@link sidh_fp2_init_set_si}.
  * @param x
  * @param a
  * @param b
@@ -241,7 +241,7 @@ void sidh_fp2_add(fp2_element_t x,
                   const fp2_element_t b);
 
 /**
- * {@link fp2_add}
+ * {@link sidh_fp2_add}
  * @param x
  * @param a
  * @param b
@@ -261,7 +261,7 @@ void sidh_fp2_sub(fp2_element_t x,
                   const fp2_element_t b);
 
 /**
- * {@link fp2_sub}
+ * {@link sidh_fp2_sub}
  * @param x
  * @param a
  * @param b
@@ -289,7 +289,7 @@ void sidh_fp2_square(fp2_element_t x,
                      const fp2_element_t a);
 
 /**
- * {@link fp2_pow}
+ * {@link sidh_fp2_pow}
  */
 void sidh_fp2_pow_ui(fp2_element_t x,
                      const fp2_element_t a,
@@ -350,7 +350,7 @@ void sidh_fp2_mul_scaler(fp2_element_t x,
                          const mpz_t scaler);
 
 /**
- * {@link fp2_mul_scaler}
+ * {@link sidh_fp2_mul_scaler}
  * @param x
  * @param a
  * @param scaler
@@ -394,7 +394,7 @@ void sidh_fp2_random(fp2_element_t x,
  * Computes the square root of {@code a}.
  * The algorithm is based on 
  * Doliskani & Schost, Taking Roots over High Extensions of Finite Fields, 2011.
- * It works for any characteristic, but since it uses {@link fp_sqrt} for 
+ * It works for any characteristic, but since it uses {@link sidh_fp_sqrt} for 
  * base-case square root, it is limited to p = 3 mod 4. 
  * @param x the square root
  * @param a

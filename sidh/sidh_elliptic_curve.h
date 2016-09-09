@@ -217,7 +217,7 @@ void sidh_point_mul_scaler(point_t R,
                            const elliptic_curve_t E);
 
 /**
- * {@link point_mul_scaler}
+ * {@link sidh_point_mul_scaler}
  * @param R
  * @param P
  * @param scaler
