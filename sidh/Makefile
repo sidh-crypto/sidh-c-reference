@@ -13,18 +13,18 @@ sidh_public_key_encryption.c\
 sidh_elliptic_curve_dlp.c\
 sidh_public_key_validation.c
 
-OBJS = $(patsubst %.c, $(BUILD_DIR)/%.o, $(SOURCES))
+OBJECTS = $(patsubst %.c, $(BUILD_DIR)/%.o, $(SOURCES))
 
 GCC=gcc
 GCCFLAGS=-Wall -O3 -march=native -std=c11
-LIBS = -lgmp -lm
+
 
 .PHONY: clean
 
-all: $(OBJS) gen_exec
+all: $(OBJECTS) gen_exec
 
 clean:
-	rm -f $(OBJS)
+	rm -f $(OBJECTS)
 	rm -rf $(BUILD_DIR)
 	cd $(TEST_DIR) && $(MAKE) clean
 
@@ -35,6 +35,6 @@ gen_exec:
 	cd $(TEST_DIR) && $(MAKE)
 
 # make the build dir if not exist
-$(OBJS) : | $(BUILD_DIR)
+$(OBJECTS) : | $(BUILD_DIR)
 $(BUILD_DIR) :
 	mkdir $(BUILD_DIR)
