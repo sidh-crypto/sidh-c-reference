@@ -16,8 +16,8 @@
  */
 
 
-#include "sidh_public_param.h"
 #include <stdio.h>
+#include "sidh_public_param.h"
 
 void sidh_public_params_init(public_params_t params) {
     mpz_init(params->characteristic);
@@ -28,13 +28,13 @@ void sidh_public_params_init(public_params_t params) {
 }
 
 int sidh_public_params_read(public_params_t paramsA,
-                            public_params_t paramsB,
-                            const char *file_name) {
+			    public_params_t paramsB,
+			    const char *file_name) {
     FILE *input;
     input = fopen(file_name, "r");
     if (!input) {
-        printf("No such file!\n");
-        return 0;
+	printf("No such file!\n");
+	return 0;
     }
 
     fp2_element_t a;
@@ -44,22 +44,32 @@ int sidh_public_params_read(public_params_t paramsA,
 
     gmp_fscanf(input, "p : %Zd \n", paramsA->characteristic);
     mpz_set(paramsB->characteristic, paramsA->characteristic);
-    gmp_fscanf(input, "E : y^2 = x^3 + (%Zd * i + %Zd) * x + (%Zd * i + %Zd) \n", a->a, a->b, b->a, b->b);
+    gmp_fscanf(input,
+	       "E : y^2 = x^3 + (%Zd * i + %Zd) * x + (%Zd * i + %Zd) \n",
+	       a->a, a->b, b->a, b->b);
     sidh_elliptic_curve_set_coeffs(paramsA->E, a, b);
     sidh_elliptic_curve_set(paramsB->E, paramsA->E);
     gmp_fscanf(input, "lA: %ld \n", &paramsA->l);
     gmp_fscanf(input, "eA: %ld \n", &paramsA->e);
     mpz_ui_pow_ui(paramsA->le, paramsA->l, paramsA->e);
-    gmp_fscanf(input, "PA: (%Zd * i + %Zd, %Zd * i + %Zd) \n", a->a, a->b, b->a, b->b);
+    gmp_fscanf(input,
+	       "PA: (%Zd * i + %Zd, %Zd * i + %Zd) \n",
+	       a->a, a->b, b->a, b->b);
     sidh_point_set_coordinates(paramsA->P, a, b, 1);
-    gmp_fscanf(input, "QA: (%Zd * i + %Zd, %Zd * i + %Zd) \n", a->a, a->b, b->a, b->b);
+    gmp_fscanf(input,
+	       "QA: (%Zd * i + %Zd, %Zd * i + %Zd) \n",
+	       a->a, a->b, b->a, b->b);
     sidh_point_set_coordinates(paramsA->Q, a, b, 1);
     gmp_fscanf(input, "lB: %ld \n", &paramsB->l);
     gmp_fscanf(input, "eB: %ld \n", &paramsB->e);
     mpz_ui_pow_ui(paramsB->le, paramsB->l, paramsB->e);
-    gmp_fscanf(input, "PB: (%Zd * i + %Zd, %Zd * i + %Zd) \n", a->a, a->b, b->a, b->b);
+    gmp_fscanf(input,
+	       "PB: (%Zd * i + %Zd, %Zd * i + %Zd) \n",
+	       a->a, a->b, b->a, b->b);
     sidh_point_set_coordinates(paramsB->P, a, b, 1);
-    gmp_fscanf(input, "QB: (%Zd * i + %Zd, %Zd * i + %Zd) \n", a->a, a->b, b->a, b->b);
+    gmp_fscanf(input,
+	       "QB: (%Zd * i + %Zd, %Zd * i + %Zd) \n",
+	       a->a, a->b, b->a, b->b);
     sidh_point_set_coordinates(paramsB->Q, a, b, 1);
 
     fclose(input);
@@ -70,10 +80,10 @@ int sidh_public_params_read(public_params_t paramsA,
 }
 
 void sidh_public_params_print(const public_params_t params,
-                              int print_torsion) {
+			      int print_torsion) {
     if (print_torsion != 1) {
-        printf("p : %s\n", mpz_get_str(NULL, 10, params->characteristic));
-        printf("E : %s\n", sidh_elliptic_curve_get_str(params->E));
+	printf("p : %s\n", mpz_get_str(NULL, 10, params->characteristic));
+	printf("E : %s\n", sidh_elliptic_curve_get_str(params->E));
     }
 
     printf("lA: %ld\n", params->l);
