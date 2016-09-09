@@ -92,7 +92,9 @@ void sidh_point_clear(point_t P) {
 
 int sidh_point_equals(const point_t P,
                       const point_t Q) {
-    return sidh_fp2_equals(P->x, Q->x) && sidh_fp2_equals(P->y, Q->y) && (P->z == Q->z);
+    return sidh_fp2_equals(P->x, Q->x) &&
+           sidh_fp2_equals(P->y, Q->y) &&
+           (P->z == Q->z);
 }
 
 char *sidh_elliptic_curve_get_str(const elliptic_curve_t E) {

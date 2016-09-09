@@ -65,7 +65,9 @@ void sidh_isogeny_clear(isogeny_t isogeny) {
 
 void sidh_isogeny_compute(isogeny_t isogeny,
                           const point_t kernel_gen) {
-    sidh_isogeny_partition_kernel(isogeny->partition, kernel_gen, isogeny->domain);
+    sidh_isogeny_partition_kernel(isogeny->partition,
+                                  kernel_gen,
+                                  isogeny->domain);
     long size = isogeny->partition_size;
 
     // compute gx_P = 3 * x_P^2 + a
@@ -455,7 +457,9 @@ void sidh_isogeny_evaluate_strategy_rec(elliptic_curve_t E,
         }
 
         for (long i = 0; i < num_gens - 1; i++) {
-            sidh_isogeny_evaluate_kohel(kernel_gens[i], isogeny, kernel_gens[i]);
+            sidh_isogeny_evaluate_kohel(kernel_gens[i], 
+                                        isogeny,
+                                        kernel_gens[i]);
         }
 
         sidh_isogeny_clear(isogeny);

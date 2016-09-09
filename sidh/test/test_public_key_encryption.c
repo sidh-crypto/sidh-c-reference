@@ -66,7 +66,10 @@ void test_public_key_encryption(const public_params_t paramsA,
 
     plaintext_t decrypted_text;
     sidh_public_key_plaintext_init(decrypted_text);
-    sidh_public_key_decrypt(decrypted_text, ciphertext, Alice_private_key, paramsA);
+    sidh_public_key_decrypt(decrypted_text,
+                            ciphertext,
+                            Alice_private_key,
+                            paramsA);
     printf("decrypted text using Alice's private-key:\n");
     for (long i = 0; i < decrypted_text->size; i++)
         printf("%c", decrypted_text->content[i]);

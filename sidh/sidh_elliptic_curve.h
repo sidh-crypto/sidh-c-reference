@@ -166,8 +166,8 @@ char *sidh_point_get_str(const point_t P);
  * @param E
  */
 void sidh_point_add(point_t R,
-                    const point_t
-                    P, const point_t Q,
+                    const point_t P,
+                    const point_t Q,
                     const elliptic_curve_t E);
 
 /**
