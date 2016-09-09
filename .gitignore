@@ -1,0 +1,4 @@
+*.cproject
+*.project
+sidh/build/
+sidh/nbproject/
