@@ -18,7 +18,7 @@ In a terminal:
 and in the test directory you can do
 
     ./test_key_exchange 
-This will run a key exchange demo for a 46bit prime. There are four sets of sample parameter sets in the test
+This will run a key exchange demo for a 46bit prime. There are four sample parameter sets in the test
 directory called `public_params_*`.  For example, to run the demo for a 521bit prime you can do
 
     ./test_key_exchange public_params_521
