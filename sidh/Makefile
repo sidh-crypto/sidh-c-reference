@@ -1,5 +1,6 @@
 BUILD_DIR = build
 TEST_DIR = test
+LIB_NAME = libsidh.a
 
 SOURCES = sidh_elliptic_curve.c\
 sidh_isogeny.c\
@@ -21,15 +22,17 @@ GCCFLAGS=-Wall -O3 -march=native -std=c11
 
 .PHONY: clean
 
-all: $(OBJECTS) gen_exec
+all: $(OBJECTS) $(LIB_NAME) gen_exec
 
 clean:
-	rm -f $(OBJECTS)
 	rm -rf $(BUILD_DIR)
 	cd $(TEST_DIR) && $(MAKE) clean
 
 $(BUILD_DIR)/%.o:	%.c
 	$(GCC) -c $< -o $@ $(GCCFLAGS)
+
+$(LIB_NAME): $(OBJECTS)
+	ar rcs $(BUILD_DIR)/$@ $^
 
 gen_exec: 
 	cd $(TEST_DIR) && $(MAKE)
