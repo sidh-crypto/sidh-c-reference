@@ -457,34 +457,30 @@ void sidh_isogeny_evaluate_strategy_rec(elliptic_curve_t E,
         }
 
         for (long i = 0; i < num_gens - 1; i++) {
-            sidh_isogeny_evaluate_velu(kernel_gens[i], 
-                                        isogeny,
-                                        kernel_gens[i]);
+            sidh_isogeny_evaluate_velu(kernel_gens[i],
+                                       isogeny,
+                                       kernel_gens[i]);
         }
 
         sidh_isogeny_clear(isogeny);
         return;
     }
 
+    long r = (long) (ratio * e);
+
     mpz_t exponent;
     mpz_init(exponent);
-
-    long r = (long) (ratio * e);
     mpz_ui_pow_ui(exponent, l, r);
-
-    point_t temp_kernel;
-    sidh_point_init(temp_kernel);
 
     sidh_point_mul_scaler(kernel_gens[num_gens],
                           kernel_gens[num_gens - 1],
                           exponent, E);
+
     sidh_isogeny_evaluate_strategy_rec(E, points, num_points, kernel_gens,
                                        num_gens + 1, l, e - r, ratio);
     sidh_isogeny_evaluate_strategy_rec(E, points, num_points, kernel_gens,
                                        num_gens, l, r, ratio);
-
     mpz_clear(exponent);
-    sidh_point_clear(temp_kernel);
 }
 
 void sidh_isogeny_evaluate_strategy(elliptic_curve_t E,
