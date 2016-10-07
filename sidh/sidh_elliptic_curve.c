@@ -292,7 +292,7 @@ void sidh_elliptic_curve_compute_j_inv(fp2_element_t j_inv,
     sidh_fp2_pow_ui(temp, E->a, 3);
     sidh_fp2_mul_scaler_si(temp, temp, 4);
     sidh_fp2_square(result, E->b);
-    sidh_fp2_mul_scaler_si(result, result, 4);
+    sidh_fp2_mul_scaler_si(result, result, 27);
     sidh_fp2_add(result, result, temp);
     sidh_fp2_inv(result, result);
     sidh_fp2_mul(result, result, temp);
