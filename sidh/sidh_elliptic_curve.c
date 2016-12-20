@@ -342,14 +342,6 @@ void sidh_elliptic_curve_random_point(point_t P,
     fp2_element_t temp_y;
     sidh_fp2_init(temp_y);
 
-    mpz_t exponent;
-    mpz_init(exponent);
-
-    // compute (p^2 + 1) / 2
-    mpz_mul(exponent, characteristic, characteristic);
-    mpz_add_ui(exponent, exponent, 1);
-    mpz_divexact_ui(exponent, exponent, 4);
-
     gmp_randstate_t randstate;
     gmp_randinit_default(randstate);
 
@@ -373,6 +365,5 @@ void sidh_elliptic_curve_random_point(point_t P,
     sidh_point_clear(result);
     sidh_fp2_clear(temp_x);
     sidh_fp2_clear(temp_y);
-    mpz_clear(exponent);
     gmp_randclear(randstate);
 }
