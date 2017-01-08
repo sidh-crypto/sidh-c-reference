@@ -54,13 +54,13 @@ void sidh_public_key_generate(public_key_t public_key,
                                    paramsA->e,
                                    0.5);
 
-    //    isogeny_evaluate_naive(public_key->E,
-    //                           points,
-    //                           2,
-    //                           kernel_gen,
-    //                           paramsA->l,
-    //                           paramsA->e,
-    //                           3);
+//        sidh_isogeny_evaluate_naive(public_key->E,
+//                               points,
+//                               2,
+//                               kernel_gen,
+//                               paramsA->l,
+//                               paramsA->e,
+//                               10);
 
     sidh_point_set(public_key->P, points[0]);
     sidh_point_set(public_key->Q, points[1]);

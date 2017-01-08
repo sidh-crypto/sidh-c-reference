@@ -66,6 +66,7 @@ void sidh_isogeny_clear(isogeny_t isogeny) {
 void sidh_isogeny_compute(isogeny_t isogeny,
                           const point_t kernel_gen) {
     sidh_isogeny_partition_kernel(isogeny->partition,
+                                  isogeny->partition_size,
                                   kernel_gen,
                                   isogeny->domain);
     long size = isogeny->partition_size;
@@ -122,40 +123,13 @@ void sidh_isogeny_compute(isogeny_t isogeny,
 }
 
 void sidh_isogeny_partition_kernel(point_t *partition,
+                                   long partition_size,
                                    const point_t kernel_gen,
                                    const elliptic_curve_t E) {
-    point_t R;
-    sidh_point_init(R);
-
-    sidh_point_set(R, kernel_gen);
-    sidh_point_set(partition[0], R);
-    long length = 1;
-    do {
-        sidh_point_add(R, R, kernel_gen, E);
-        if (sidh_isogeny_partition_should_add(partition, R, length)) {
-            sidh_point_set(partition[length], R);
-            length++;
-        }
-    } while (!sidh_point_is_zero(R));
-
-    sidh_point_clear(R);
-}
-
-int sidh_isogeny_partition_should_add(point_t *points,
-                                      const point_t R,
-                                      long length) {
-    if (sidh_point_is_zero(R))
-        return 0;
-
-    if (sidh_point_has_order_2(R))
-        return 1;
-
-    for (long i = 0; i < length; i++) {
-        if (sidh_fp2_equals(R->x, points[i]->x))
-            return 0;
+    sidh_point_set(partition[0], kernel_gen);
+    for (long i = 1; i < partition_size; i++){
+        sidh_point_add(partition[i], partition[i - 1], kernel_gen, E);
     }
-
-    return 1;
 }
 
 void sidh_isogeny_set_kernel_size(isogeny_t isogeny,

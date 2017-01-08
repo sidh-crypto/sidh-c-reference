@@ -39,7 +39,7 @@ void sidh_shared_key_generate(fp2_element_t shared_key,
     sidh_elliptic_curve_set(E, public_key->E);
 
     sidh_isogeny_evaluate_strategy_curve(E, kernel_gen, params->l, params->e, 0.5);
-    //    isogeny_evaluate_naive_curve(E, kernel_gen, params->l, params->e, 3);
+//    sidh_isogeny_evaluate_naive_curve(E, kernel_gen, params->l, params->e, 3);
 
     sidh_elliptic_curve_compute_j_inv(shared_key, E);
 
