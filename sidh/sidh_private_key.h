@@ -74,6 +74,26 @@ void sidh_private_key_compute_kernel_gen(point_t gen,
                                          const elliptic_curve_t E);
 
 /**
+ * Converts a private-key to an array of bytes.
+ * @param bytes
+ * @param private_key
+ * @param prime_size
+ */
+void sidh_private_key_to_bytes(uint8_t *bytes, 
+                               const private_key_t private_key,
+                               long prime_size);
+
+/**
+ * Converts an array of bytes to a private-key.
+ * @param private_key
+ * @param bytes
+ * @param prime_size
+ */
+void sidh_bytes_to_private_key(private_key_t private_key,
+                               const uint8_t *bytes,
+                               long prime_size);
+
+/**
  * Prints {@code private_key} to the standard output.
  * @param private_key
  */

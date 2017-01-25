@@ -20,6 +20,7 @@
 #include <string.h>
 #include <stdlib.h>
 #include <stdio.h>
+#include <stdint.h>
 
 void sidh_fp_init_chararacteristic_ui(long p) {
     mpz_init_set_ui(characteristic, p);
@@ -468,4 +469,22 @@ void sidh_fp2_norm(mpz_t x,
 
     mpz_set(x, temp1);
     mpz_clears(temp1, temp2, NULL);
+}
+
+void sidh_fp2_to_bytes(uint8_t *bytes, 
+                       const fp2_element_t a,
+                       long prime_size) {
+    for (long i = 0; i < 2 * prime_size; i++)
+        bytes[i] = 0;
+    
+    mpz_export(bytes, NULL, -1, 1, 0, 0, a->a);
+    mpz_export(bytes + prime_size, NULL, -1, 1, 0, 0, a->b);
+}
+
+void sidh_bytes_to_fp2(fp2_element_t a,
+                       const uint8_t *bytes,
+                       long prime_size) {
+    sidh_fp2_zero(a);
+    mpz_import(a->a, prime_size, -1, 1, 0, 0, bytes);
+    mpz_import(a->b, prime_size, -1, 1, 0, 0, bytes + prime_size);
 }

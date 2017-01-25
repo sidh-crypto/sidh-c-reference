@@ -2,3 +2,6 @@
 *.project
 sidh/build/
 sidh/nbproject/
+sidh/test/test_key_exchange
+sidh/test/test_public_key_encryption
+

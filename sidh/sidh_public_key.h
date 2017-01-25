@@ -61,6 +61,29 @@ void sidh_public_key_generate(public_key_t public_key,
                               const public_params_t paramsA,
                               const public_params_t paramsB);
 
+
+/**
+ * Converts a public-key to a byte array.
+ * @param bytes
+ * @param public_key
+ * @param prime_size
+ */
+void sidh_public_key_to_bytes(uint8_t *bytes, 
+                              const public_key_t public_key,
+                              long prime_size);
+
+
+/**
+ * Converts a byte array to a public-key.
+ * @param public_key
+ * @param bytes
+ * @param prime_size
+ */
+void sidh_bytes_to_public_key(public_key_t public_key,
+                              const uint8_t *bytes,
+                              long prime_size);
+
+    
 /**
  * Prints {@code public_key} to the standard output.
  * @param public_key

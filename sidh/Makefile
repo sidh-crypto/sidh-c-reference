@@ -17,7 +17,7 @@ sidh_public_key_validation.c
 OBJECTS = $(patsubst %.c, $(BUILD_DIR)/%.o, $(SOURCES))
 
 GCC=gcc
-GCCFLAGS=-Wall -O3 -march=native -std=c11
+GCCFLAGS=-Wall -O0 -g -march=native -std=c11
 
 
 .PHONY: clean

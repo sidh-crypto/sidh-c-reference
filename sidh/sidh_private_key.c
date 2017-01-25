@@ -80,6 +80,25 @@ void sidh_private_key_compute_kernel_gen(point_t gen,
     sidh_point_clear(result);
 }
 
+void sidh_private_key_to_bytes(uint8_t *bytes, 
+                               const private_key_t private_key,
+                               long prime_size) {
+    for (long i = 0; i < 2 * prime_size; i++)
+        bytes[i] = 0;
+    
+    mpz_export(bytes, NULL, -1, 1, 0, 0, private_key->m);
+    mpz_export(bytes + prime_size, NULL, -1, 1, 0, 0, private_key->n);
+}
+
+void sidh_bytes_to_private_key(private_key_t private_key,
+                               const uint8_t *bytes,
+                               long prime_size) {
+    mpz_set_ui(private_key->m, 0);
+    mpz_set_ui(private_key->n, 0);
+    mpz_import(private_key->m, prime_size, -1, 1, 0, 0, bytes);
+    mpz_import(private_key->n, prime_size, -1, 1, 0, 0, bytes + prime_size);
+}
+
 void sidh_private_key_print(const private_key_t private_key) {
     printf("m: %s\n", mpz_get_str(NULL, 10, private_key->m));
     printf("n: %s\n", mpz_get_str(NULL, 10, private_key->n));

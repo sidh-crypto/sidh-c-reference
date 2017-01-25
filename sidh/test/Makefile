@@ -7,7 +7,7 @@ LIB_DIRS = -L$(BUILD_DIR) -L/usr/local/lib
 EXECS = $(patsubst %.c, %, $(SOURCES))
 
 GCC = gcc
-GCCFLAGS = -Wall -O3 -march=native -std=c11 -static
+GCCFLAGS = -Wall -O0 -g -march=native -std=c11 -static
 LIBS = $(LIB_DIRS) -lsidh -lgmp -lm
 
 .PHONY: clean

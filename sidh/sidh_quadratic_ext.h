@@ -19,6 +19,7 @@
 #define FP2_H
 
 #include <gmp.h>
+#include <stdint.h>
 
 #ifdef __cplusplus
 extern "C" {
@@ -416,6 +417,28 @@ int sidh_fp2_is_square(const fp2_element_t a);
  */
 void sidh_fp2_norm(mpz_t x,
                    const fp2_element_t a);
+
+
+/**
+ * Converts bytes an fp2 element to a byte array.
+ * @param bytes
+ * @param a
+ * @param prime_size
+ */
+void sidh_fp2_to_bytes(uint8_t *bytes, 
+                       const fp2_element_t a,
+                       long prime_size);
+
+
+/**
+ * Converts a byte array to an fp2 element.
+ * @param a
+ * @param bytes
+ * @param prime_size
+ */
+void sidh_bytes_to_fp2(fp2_element_t a,
+                       const uint8_t *bytes,
+                       long prime_size);
 
 #ifdef __cplusplus
 }
