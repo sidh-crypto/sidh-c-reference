@@ -36,10 +36,7 @@ void test_key_exchange(const public_params_t paramsA,
 
     private_key_t Alice_private_key;
     sidh_private_key_init(Alice_private_key);
-//    sidh_private_key_generate(Alice_private_key, paramsA);
-    mpz_set_ui(Alice_private_key->m, 10);
-    mpz_set_ui(Alice_private_key->n, 11);
-    
+    sidh_private_key_generate(Alice_private_key, paramsA);
     printf("Alice's private key: \n");
     sidh_private_key_print(Alice_private_key);
     printf("\n--------------------------------------------\n\n");
@@ -61,9 +58,7 @@ void test_key_exchange(const public_params_t paramsA,
 
     private_key_t Bob_private_key;
     sidh_private_key_init(Bob_private_key);
-//    sidh_private_key_generate(Bob_private_key, paramsB);
-    mpz_set_ui(Bob_private_key->m, 105);
-    mpz_set_ui(Bob_private_key->n, 11945);
+    sidh_private_key_generate(Bob_private_key, paramsB);
     printf("Bob's private key: \n");
     sidh_private_key_print(Bob_private_key);
     printf("\n--------------------------------------------\n\n");
@@ -100,25 +95,6 @@ void test_key_exchange(const public_params_t paramsA,
     printf("Bob's shared key: \n");
     printf("%s\n", sidh_fp2_get_str(Bob_shared_key));
     printf("\n--------------------------------------------\n\n");
-
-    long prime_size = (mpz_sizeinbase(characteristic, 2) + 7) / 8;
-    long key_size = 12 * prime_size;
-    uint8_t keyA[key_size];
-    uint8_t keyB[key_size];
-    sidh_public_key_to_bytes(keyA, Alice_public_key, prime_size);
-    sidh_public_key_to_bytes(keyB, Bob_public_key, prime_size);
-    
-    for (long i = 0; i < key_size; i++)
-        printf("%02X", keyA[i]);
-    printf("\n");
-    for (long i = 0; i < key_size; i++)
-        printf("%02X", keyB[i]);
-    printf("\n\n");
-    
-    public_key_t temp;
-    sidh_public_key_init(temp);
-    sidh_bytes_to_public_key(temp, keyA, prime_size);
-    sidh_public_key_print(temp);
         
     sidh_private_key_clear(Alice_private_key);
     sidh_public_key_clear(Alice_public_key);
